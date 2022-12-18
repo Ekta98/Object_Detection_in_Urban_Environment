@@ -139,16 +139,23 @@ python inference_video.py --labelmap_path label_map.pbtxt --model_path experimen
 ```
 
 ## Submission Template
+This repository contains the first project of nanodegree program of Udacity Self Driving Car. In this project we are using Tf object detection API for detection of objects such as cars,pedestrians, cyclists from recorded image of front camera of car.
 
-### Project overview
-This section should contain a brief description of the project and what we are trying to achieve. Why is object detection such an important component of self driving car systems?
 
 ### Set up
-This section should contain a brief description of the steps to follow to run the code for this repository.
+To use the project repository GPU compatible system should be available. I have used the classroom workspace available in the course. If local installation is needed follow prerequisite section for setuup details
 
 ### Dataset
-#### Dataset analysis
-This section should contain a quantitative and qualitative description of the dataset. It should include images, charts and other visualizations.
+The dataset has images taken from different places, weather conditions and at different times of the day. We have to fit rectangular bounding boxes of different colors for different object classes which includes pedestrians, cyclists and cars.The dataset contains diverse set of images of which some are blurry, clear, different light condition(daytime/ night). Sample images with different light conditions are displayed below with different objects highlighted with different color bounding boxes
+![image](https://user-images.githubusercontent.com/28135189/208306532-81e1a59f-339a-4a87-8c64-266d6c8c5d90.png)
+
+![image](https://user-images.githubusercontent.com/28135189/208306572-6fcb9341-7f7a-4def-9218-1c830c10e34a.png)
+
+
+The dataset analysis also shows the imbalance of classes in the dataset. This shows that the number of cyclists is very less as compared to cars and pedestrians. This might cause poor performance in the classification of cyclists.
+
+![image](https://user-images.githubusercontent.com/28135189/208306659-39d24dca-72aa-43d0-b041-41a361eee21a.png)
+
 #### Cross validation
 This section should detail the cross validation strategy and justify your approach.
 
