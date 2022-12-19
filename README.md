@@ -180,7 +180,8 @@ To improve on the models performance I have used following augmentations:
 	adding random black patches with probability of 0.3,
 	brightness adjusted to 0.3,
 	contrast values between 0.6 and 1.0.
-	
+These augmentations are done in experiments/reference/pipeline_new.config
+
 	
 ![image](https://user-images.githubusercontent.com/28135189/208374025-8a7b2097-7dc7-4c5e-a8b6-7ebf43a8c3be.png)
 
