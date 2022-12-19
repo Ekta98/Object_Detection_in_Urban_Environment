@@ -19,7 +19,7 @@ The data you will use for training, validation and testing is organized as follo
     - test - contains 3 files to test your model and create inference videos
 ```
 The `training_and_validation` folder contains file that have been downsampled: we have selected one every 10 frames from 10 fps videos. The `testing` folder contains frames from the 10 fps video without downsampling.
-```
+
 You will split this `training_and_validation` data into `train`, and `val` sets by completing and executing the `create_splits.py` file.
 
 
@@ -138,7 +138,9 @@ Finally, you can create a video of your model's inferences for any tf record fil
 python inference_video.py --labelmap_path label_map.pbtxt --model_path experiments/reference/exported/saved_model --tf_record_path /data/waymo/testing/segment-12200383401366682847_2552_140_2572_140_with_camera_labels.tfrecord --config_path experiments/reference/pipeline_new.config --output_path animation.gif
 ```
 
-## Submission Template
+## Submission 
+
+### Project Overview
 This repository contains the first project of nanodegree program of Udacity Self Driving Car. In this project we are using Tf object detection API for detection of objects such as cars,pedestrians, cyclists from recorded image of front camera of car.
 
 
@@ -147,23 +149,42 @@ To use the project repository GPU compatible system should be available. I have 
 
 ### Dataset
 The dataset has images taken from different places, weather conditions and at different times of the day. We have to fit rectangular bounding boxes of different colors for different object classes which includes pedestrians, cyclists and cars.The dataset contains diverse set of images of which some are blurry, clear, different light condition(daytime/ night). Sample images with different light conditions are displayed below with different objects highlighted with different color bounding boxes
-![image](https://user-images.githubusercontent.com/28135189/208306532-81e1a59f-339a-4a87-8c64-266d6c8c5d90.png)
 
-![image](https://user-images.githubusercontent.com/28135189/208306572-6fcb9341-7f7a-4def-9218-1c830c10e34a.png)
+![Night](https://user-images.githubusercontent.com/28135189/208306532-81e1a59f-339a-4a87-8c64-266d6c8c5d90.png)
+
+![Day](https://user-images.githubusercontent.com/28135189/208306572-6fcb9341-7f7a-4def-9218-1c830c10e34a.png)
+
 
 
 The dataset analysis also shows the imbalance of classes in the dataset. This shows that the number of cyclists is very less as compared to cars and pedestrians. This might cause poor performance in the classification of cyclists.
 
-![image](https://user-images.githubusercontent.com/28135189/208306659-39d24dca-72aa-43d0-b041-41a361eee21a.png)
+![image](https://user-images.githubusercontent.com/28135189/208373597-f82683c0-e02c-4f2e-8b75-ec06645b2370.png)
 
-#### Cross validation
-This section should detail the cross validation strategy and justify your approach.
+
+
+### Cross validation
+The data in workspace is divided into train, test and valididation sets. Train set has 86 tfrecords, val has 10 and test has 3.
+This ensures that we have sufficient data for training and validation. We are using small percent of the sample as the test set to check the error rate and if the model is overfitting the rest is divided in training and validation so that overfitting will not be an issue.
 
 ### Training
 #### Reference experiment
-This section should detail the results of the reference experiment. It should includes training metrics and a detailed explanation of the algorithm's performances.
-![image](image/image.png)
+Here the residual network model (Resnet) is taken as reference. Initially without augmentation, the model loss is as shown below
+![](https://github.com/Ekta98/Object_Detection_in_Urban_Environment/blob/main/image/image.png)
+
+Initially the model was overffiting as the training loss is diverging from the validation loss, this divergence indicates a significant error rate during model validation which is an indication that the model is overfitting. The training loss is indicated in orange and the validation loss in blue.
+
 
 #### Improve on the reference
-This section should highlight the different strategies you adopted to improve your model. It should contain relevant figures and details of your findings.
-# Object_Detection_in_Urban_Environment
+To improve on the models performance I have used following augmentations:
+        rgb to grayscale conversion with probability 0.25,
+	adding random black patches with probability of 0.3,
+	brightness adjusted to 0.3,
+	contrast values between 0.6 and 1.0.
+	
+	
+![image](https://user-images.githubusercontent.com/28135189/208374025-8a7b2097-7dc7-4c5e-a8b6-7ebf43a8c3be.png)
+
+The loss is lower than the previous loss (un-augmented model). This is an indication of better performance.So the augmentations done have improved the overall performance. 
+Also the data that we had, had lesser number of pedestrians and cyclists and this will have an effect on the models performance. Overfitting has reduced to an extent with augmentation, however better classification results would be resulting from a more balanced dataset.
+
+
